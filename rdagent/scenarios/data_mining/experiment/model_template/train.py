@@ -1,5 +1,4 @@
 import os
-import random
 from pathlib import Path
 
 import numpy as np
@@ -12,6 +11,7 @@ from model import model_cls
 from sklearn.metrics import accuracy_score, roc_auc_score
 from torch.utils.data import DataLoader, Dataset
 from torchvision import datasets, transforms
+import secrets
 
 # Set device for training
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
@@ -53,7 +53,7 @@ df_pop = pd.read_csv(datapath + "/population/ARF_12h.csv")["ARF_LABEL"]
 X = X.transpose(0, 2, 1)
 
 indices = [i for i in range(len(df_pop))]
-random.shuffle(indices)
+secrets.SystemRandom().shuffle(indices)
 split_point = int(0.7 * len(df_pop))
 
 X_train, y_train = X[indices[:split_point]], np.array(df_pop[indices[:split_point]])

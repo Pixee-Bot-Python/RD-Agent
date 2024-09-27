@@ -1,5 +1,4 @@
 import importlib.util
-import random
 from collections import defaultdict
 from pathlib import Path
 
@@ -8,10 +7,11 @@ import pandas as pd
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
+import secrets
 
 # Set random seed for reproducibility
 SEED = 42
-random.seed(SEED)
+secrets.SystemRandom().seed(SEED)
 np.random.seed(SEED)
 DIRNAME = Path(__file__).absolute().resolve().parent
 
