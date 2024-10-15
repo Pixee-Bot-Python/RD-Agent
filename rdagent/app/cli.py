@@ -6,6 +6,7 @@ This will
 - autoamtically load dotenv
 """
 from dotenv import load_dotenv
+from security import safe_command
 
 load_dotenv(".env")
 # 1) Make sure it is at the beginning of the script so that it will load dotenv before initializing BaseSettings.
@@ -39,7 +40,7 @@ def ui(port=80, log_dir="", debug=False):
             cmds.append(f"--log_dir={log_dir}")
         if debug:
             cmds.append("--debug")
-        subprocess.run(cmds)
+        safe_command.run(subprocess.run, cmds)
 
 
 def app():

@@ -30,6 +30,7 @@ from rich.rule import Rule
 from rich.table import Table
 
 from rdagent.log import rdagent_logger as logger
+from security import safe_command
 
 ASpecificBaseModel = TypeVar("ASpecificBaseModel", bound=BaseModel)
 
@@ -109,7 +110,7 @@ class LocalEnv(Env[LocalConf]):
         cwd = None
         if local_path:
             cwd = Path(local_path).resolve()
-        result = subprocess.run(command, cwd=cwd, env={**os.environ, **env}, capture_output=True, text=True)
+        result = safe_command.run(subprocess.run, command, cwd=cwd, env={**os.environ, **env}, capture_output=True, text=True)
 
         if result.returncode != 0:
             raise RuntimeError(f"Error while running the command: {result.stderr}")
