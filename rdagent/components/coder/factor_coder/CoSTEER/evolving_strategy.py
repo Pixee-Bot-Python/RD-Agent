@@ -128,7 +128,7 @@ class FactorEvolvingStrategy(MultiProcessEvolvingStrategy):
             queried_former_failed_knowledge_to_render = queried_former_failed_knowledge
 
             system_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     implement_prompts["evolving_strategy_factor_implementation_v1_system"],
                 )
@@ -144,7 +144,7 @@ class FactorEvolvingStrategy(MultiProcessEvolvingStrategy):
             queried_similar_successful_knowledge_to_render = queried_similar_successful_knowledge
             for _ in range(10):  # max attempt to reduce the length of user_prompt
                 user_prompt = (
-                    Environment(undefined=StrictUndefined)
+                    Environment(undefined=StrictUndefined, autoescape=True)
                     .from_string(
                         implement_prompts["evolving_strategy_factor_implementation_v1_user"],
                     )
@@ -221,7 +221,7 @@ class FactorEvolvingStrategyWithGraph(MultiProcessEvolvingStrategy):
             queried_former_failed_knowledge_to_render = queried_former_failed_knowledge
 
             system_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     implement_prompts["evolving_strategy_factor_implementation_v1_system"],
                 )
@@ -247,7 +247,7 @@ class FactorEvolvingStrategyWithGraph(MultiProcessEvolvingStrategy):
                     and len(queried_former_failed_knowledge_to_render) != 0
                 ):
                     error_summary_system_prompt = (
-                        Environment(undefined=StrictUndefined)
+                        Environment(undefined=StrictUndefined, autoescape=True)
                         .from_string(implement_prompts["evolving_strategy_error_summary_v2_system"])
                         .render(
                             scenario=self.scen.get_scenario_all_desc(),
@@ -265,7 +265,7 @@ class FactorEvolvingStrategyWithGraph(MultiProcessEvolvingStrategy):
                     )
                     for _ in range(10):  # max attempt to reduce the length of error_summary_user_prompt
                         error_summary_user_prompt = (
-                            Environment(undefined=StrictUndefined)
+                            Environment(undefined=StrictUndefined, autoescape=True)
                             .from_string(implement_prompts["evolving_strategy_error_summary_v2_user"])
                             .render(
                                 queried_similar_component_knowledge=queried_similar_component_knowledge_to_render,
@@ -285,7 +285,7 @@ class FactorEvolvingStrategyWithGraph(MultiProcessEvolvingStrategy):
                     )
                 # 构建user_prompt。开始写代码
                 user_prompt = (
-                    Environment(undefined=StrictUndefined)
+                    Environment(undefined=StrictUndefined, autoescape=True)
                     .from_string(
                         implement_prompts["evolving_strategy_factor_implementation_v2_user"],
                     )

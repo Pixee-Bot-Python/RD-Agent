@@ -19,8 +19,8 @@ class ModelCodeWriter(Developer[ModelExperiment]):
             mti.prepare()
             pr = Prompts(file_path=DIRNAME / "prompt.yaml")
 
-            user_prompt_tpl = Environment(undefined=StrictUndefined).from_string(pr["code_implement_user"])
-            sys_prompt_tpl = Environment(undefined=StrictUndefined).from_string(pr["code_implement_sys"])
+            user_prompt_tpl = Environment(undefined=StrictUndefined, autoescape=True).from_string(pr["code_implement_user"])
+            sys_prompt_tpl = Environment(undefined=StrictUndefined, autoescape=True).from_string(pr["code_implement_sys"])
 
             user_prompt = user_prompt_tpl.render(
                 name=t.name,

@@ -36,7 +36,7 @@ class ModelHypothesisGen(HypothesisGen):
         context_dict, json_flag = self.prepare_context(trace)
 
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(ModelHypothesisGen.prompts["hypothesis_gen"]["system_prompt"])
             .render(
                 targets="feature engineering and model building",
@@ -46,7 +46,7 @@ class ModelHypothesisGen(HypothesisGen):
             )
         )
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(ModelHypothesisGen.prompts["hypothesis_gen"]["user_prompt"])
             .render(
                 targets="feature engineering and model building",
@@ -79,7 +79,7 @@ class ModelHypothesis2Experiment(Hypothesis2Experiment[ModelExperiment]):
     def convert(self, hypothesis: Hypothesis, trace: Trace) -> ModelExperiment:
         context, json_flag = self.prepare_context(hypothesis, trace)
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(ModelHypothesis2Experiment.prompts["hypothesis2experiment"]["system_prompt"])
             .render(
                 targets="feature engineering and model building",
@@ -88,7 +88,7 @@ class ModelHypothesis2Experiment(Hypothesis2Experiment[ModelExperiment]):
             )
         )
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(ModelHypothesis2Experiment.prompts["hypothesis2experiment"]["user_prompt"])
             .render(
                 targets="feature engineering and model building",

@@ -70,7 +70,7 @@ class ModelCoderEvolvingStrategy(EvolvingStrategy):
             queried_former_failed_knowledge_to_render = queried_former_failed_knowledge
 
             system_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     coder_prompts["evolving_strategy_model_coder"]["system"],
                 )
@@ -84,7 +84,7 @@ class ModelCoderEvolvingStrategy(EvolvingStrategy):
             queried_similar_successful_knowledge_to_render = queried_similar_successful_knowledge
             for _ in range(10):  # max attempt to reduce the length of user_prompt
                 user_prompt = (
-                    Environment(undefined=StrictUndefined)
+                    Environment(undefined=StrictUndefined, autoescape=True)
                     .from_string(
                         coder_prompts["evolving_strategy_model_coder"]["user"],
                     )

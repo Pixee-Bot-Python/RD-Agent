@@ -87,7 +87,7 @@ class FactorCodeEvaluator(FactorEvaluator):
         code = implementation.code
 
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(evaluate_prompts["evaluator_code_feedback_v1_system"])
             .render(scenario=self.scen.get_scenario_all_desc() if self.scen is not None else "No scenario description.")
         )
@@ -95,7 +95,7 @@ class FactorCodeEvaluator(FactorEvaluator):
         execution_feedback_to_render = execution_feedback
         for _ in range(10):  # 10 times to split the content is enough
             user_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     evaluate_prompts["evaluator_code_feedback_v1_user"],
                 )
@@ -163,7 +163,7 @@ class FactorOutputFormatEvaluator(FactorEvaluator):
         gen_df.info(buf=buffer)
         gen_df_info_str = f"The use is currently working on a feature related task.\nThe output dataframe info is:\n{buffer.getvalue()}"
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(
                 evaluate_prompts["evaluator_output_format_system"],
             )
@@ -471,7 +471,7 @@ class FactorFinalDecisionEvaluator(Evaluator):
         **kwargs,
     ) -> Tuple:
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(evaluate_prompts["evaluator_final_decision_v1_system"])
             .render(scenario=self.scen.get_scenario_all_desc() if self.scen is not None else "No scenario description.")
         )
@@ -479,7 +479,7 @@ class FactorFinalDecisionEvaluator(Evaluator):
 
         for _ in range(10):  # 10 times to split the content is enough
             user_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     evaluate_prompts["evaluator_final_decision_v1_user"],
                 )

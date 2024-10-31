@@ -60,4 +60,4 @@ class T:
         """
         Render the template with the given context.
         """
-        return Environment(undefined=StrictUndefined).from_string(self.template).render(**context)
+        return Environment(undefined=StrictUndefined, autoescape=True).from_string(self.template).render(**context)

@@ -87,7 +87,7 @@ class ModelCodeEvaluator(Evaluator):
         code = implementation.code
 
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(evaluate_prompts["evaluator_code_feedback"]["system"])
             .render(scenario=self.scen.get_scenario_all_desc() if self.scen is not None else "No scenario description.")
         )
@@ -95,7 +95,7 @@ class ModelCodeEvaluator(Evaluator):
         execution_feedback_to_render = model_execution_feedback
         for _ in range(10):  # 10 times to split the content is enough
             user_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     evaluate_prompts["evaluator_code_feedback"]["user"],
                 )
@@ -143,7 +143,7 @@ class ModelFinalEvaluator(Evaluator):
             assert isinstance(gt_implementation, ModelFBWorkspace)
 
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(evaluate_prompts["evaluator_final_feedback"]["system"])
             .render(scenario=self.scen.get_scenario_all_desc() if self.scen is not None else "No scenario description.")
         )
@@ -152,7 +152,7 @@ class ModelFinalEvaluator(Evaluator):
 
         for _ in range(10):  # 10 times to split the content is enough
             user_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(
                     evaluate_prompts["evaluator_final_feedback"]["user"],
                 )

@@ -99,7 +99,7 @@ class KGHypothesisExperiment2Feedback(HypothesisExperiment2Feedback):
 
         # Generate the system prompt
         sys_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict[prompt_key]["system"])
             .render(scenario=self.scen.get_scenario_all_desc())
         )
@@ -132,7 +132,7 @@ class KGHypothesisExperiment2Feedback(HypothesisExperiment2Feedback):
         }
 
         usr_prompt = (
-            Environment(undefined=StrictUndefined).from_string(prompt_dict[prompt_key]["user"]).render(**render_dict)
+            Environment(undefined=StrictUndefined, autoescape=True).from_string(prompt_dict[prompt_key]["user"]).render(**render_dict)
         )
 
         response = APIBackend().build_messages_and_create_chat_completion(

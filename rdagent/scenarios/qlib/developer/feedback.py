@@ -80,14 +80,14 @@ class QlibFactorHypothesisExperiment2Feedback(HypothesisExperiment2Feedback):
 
         # Generate the system prompt
         sys_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(feedback_prompts["factor_feedback_generation"]["system"])
             .render(scenario=self.scen.get_scenario_all_desc())
         )
 
         # Generate the user prompt
         usr_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(feedback_prompts["factor_feedback_generation"]["user"])
             .render(
                 hypothesis_text=hypothesis_text,
@@ -140,7 +140,7 @@ class QlibModelHypothesisExperiment2Feedback(HypothesisExperiment2Feedback):
         SOTA_hypothesis, SOTA_experiment = trace.get_sota_hypothesis_and_experiment()
 
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(feedback_prompts["model_feedback_generation"]["user"])
             .render(
                 context=context,

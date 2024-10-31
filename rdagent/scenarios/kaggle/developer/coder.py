@@ -40,18 +40,18 @@ class KGModelFeatureSelectionCoder(Developer[KGModelExperiment]):
         assert target_model_type in KG_SELECT_MAPPING
         if len(exp.experiment_workspace.data_description) == 1:
             code = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(DEFAULT_SELECTION_CODE)
                 .render(feature_index_list=None)
             )
         else:
             system_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(prompt_dict["model_feature_selection"]["system"])
                 .render(scenario=self.scen.get_scenario_all_desc(), model_type=exp.sub_tasks[0].model_type)
             )
             user_prompt = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(prompt_dict["model_feature_selection"]["user"])
                 .render(feature_groups=[desc[0] for desc in exp.experiment_workspace.data_description])
             )
@@ -64,7 +64,7 @@ class KGModelFeatureSelectionCoder(Developer[KGModelExperiment]):
             chosen_index_to_list_index = [i - 1 for i in chosen_index]
 
             code = (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(DEFAULT_SELECTION_CODE)
                 .render(feature_index_list=chosen_index_to_list_index)
             )

@@ -54,13 +54,13 @@ class KGScenario(Scenario):
 
     def _analysis_competition_description(self):
         sys_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["kg_description_template"]["system"])
             .render()
         )
 
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["kg_description_template"]["user"])
             .render(
                 competition_descriptions=self.competition_descriptions,
@@ -111,7 +111,7 @@ class KGScenario(Scenario):
         ).read_text()
 
         background_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(background_template)
             .render(
                 train_script=train_script,
@@ -170,7 +170,7 @@ class KGScenario(Scenario):
     @property
     def output_format(self) -> str:
         return (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["kg_model_output_format"])
             .render(channel=self.model_output_channel)
         )
@@ -186,7 +186,7 @@ The model code should follow the interface:
     @property
     def simulator(self) -> str:
         kg_model_simulator = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["kg_model_simulator"])
             .render(submission_specifications=self.submission_specifications)
         )
