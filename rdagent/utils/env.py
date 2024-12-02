@@ -9,7 +9,6 @@ Tries to create uniform environment for the agent to run;
 
 import json
 import os
-import pickle
 import subprocess
 import sys
 import uuid
@@ -30,6 +29,7 @@ from rich.rule import Rule
 from rich.table import Table
 
 from rdagent.log import rdagent_logger as logger
+import fickling
 
 ASpecificBaseModel = TypeVar("ASpecificBaseModel", bound=BaseModel)
 
@@ -354,7 +354,7 @@ class DockerEnv(Env[DockerConf]):
         os.remove(os.path.join(local_path, random_file_name))
         for name in dump_file_names:
             if os.path.exists(os.path.join(local_path, f"{name}")):
-                results.append(pickle.load(open(os.path.join(local_path, f"{name}"), "rb")))
+                results.append(fickling.load(open(os.path.join(local_path, f"{name}"), "rb")))
                 os.remove(os.path.join(local_path, f"{name}"))
             else:
                 return log_output, None

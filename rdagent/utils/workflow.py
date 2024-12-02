@@ -19,6 +19,7 @@ from tqdm.auto import tqdm
 
 from rdagent.core.exception import CoderError
 from rdagent.log import rdagent_logger as logger
+import fickling
 
 
 class LoopMeta(type):
@@ -147,7 +148,7 @@ class LoopBase:
     def load(cls, path: str | Path):
         path = Path(path)
         with path.open("rb") as f:
-            session = pickle.load(f)
+            session = fickling.load(f)
         logger.set_trace_path(session.session_folder.parent)
 
         max_loop = max(session.loop_trace.keys())

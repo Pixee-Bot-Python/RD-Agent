@@ -6,6 +6,7 @@ from pathlib import Path
 from typing import Any, Generator, Literal, Union, cast
 
 from .base import Message, Storage
+import fickling
 
 LOG_LEVEL = Literal["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
 
@@ -104,7 +105,7 @@ class FileStorage(Storage):
             pid = file.parent.name
 
             with file.open("rb") as f:
-                content = pickle.load(f)
+                content = fickling.load(f)
 
             timestamp = datetime.strptime(file.stem, "%Y-%m-%d_%H-%M-%S-%f").replace(tzinfo=timezone.utc)
 
