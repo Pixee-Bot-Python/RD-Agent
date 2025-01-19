@@ -12,15 +12,14 @@ from rdagent.core.prompts import Prompts
 from rdagent.core.scenario import Scenario
 from rdagent.log import rdagent_logger as logger
 from rdagent.oai.llm_utils import APIBackend
+import secrets
 
 scheduler_prompts = Prompts(file_path=Path(__file__).parent.parent / "prompts.yaml")
 
 
 def RandomSelect(to_be_finished_task_index, implementation_factors_per_round):
-    import random
 
-    to_be_finished_task_index = random.sample(
-        to_be_finished_task_index,
+    to_be_finished_task_index = secrets.SystemRandom().sample(to_be_finished_task_index,
         implementation_factors_per_round,
     )
 

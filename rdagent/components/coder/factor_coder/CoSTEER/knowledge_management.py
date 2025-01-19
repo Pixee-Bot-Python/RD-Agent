@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import copy
 import json
-import random
 import re
 from itertools import combinations
 from pathlib import Path
@@ -34,6 +33,7 @@ from rdagent.oai.llm_utils import (
     APIBackend,
     calculate_embedding_distance_between_str_list,
 )
+import secrets
 
 
 class FactorKnowledge(Knowledge):
@@ -547,7 +547,7 @@ class FactorGraphRAGStrategy(RAGStrategy):
                         for knowledge in factor_implementation_queried_graph_knowledge.component_with_success_task[
                             target_factor_task_information
                         ]
-                        if random.uniform(0, 1) <= knowledge_sampler
+                        if secrets.SystemRandom().uniform(0, 1) <= knowledge_sampler
                     ]
 
                 # Make sure no less than half of the knowledge are from GT
@@ -701,7 +701,7 @@ class FactorGraphRAGStrategy(RAGStrategy):
                     same_error_success_knowledge_pair_list = [
                         knowledge
                         for knowledge in same_error_success_knowledge_pair_list
-                        if random.uniform(0, 1) <= knowledge_sampler
+                        if secrets.SystemRandom().uniform(0, 1) <= knowledge_sampler
                     ]
 
                 same_error_success_knowledge_pair_list = same_error_success_knowledge_pair_list[:v2_query_error_limit]
