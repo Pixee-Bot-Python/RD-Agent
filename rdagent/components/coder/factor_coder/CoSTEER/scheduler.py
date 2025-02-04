@@ -43,7 +43,7 @@ def LLMSelect(
             tasks.append((i, evo.sub_tasks[i], former_trace[target_factor_task_information]))
 
     system_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(
             scheduler_prompts["select_implementable_factor_system"],
         )
@@ -54,7 +54,7 @@ def LLMSelect(
 
     for _ in range(10):  # max attempt to reduce the length of user_prompt
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(
                 scheduler_prompts["select_implementable_factor_user"],
             )

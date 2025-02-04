@@ -153,7 +153,7 @@ def __extract_factors_formulation_from_content(
 
     system_prompt = document_process_prompts["extract_factor_formulation_system"]
     current_user_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(
             document_process_prompts["extract_factor_formulation_user"],
         )

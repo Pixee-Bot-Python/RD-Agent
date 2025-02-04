@@ -322,7 +322,7 @@ class FactorGraphRAGStrategy(RAGStrategy):
         for _, component_node in enumerate(all_component_nodes):
             all_component_content += f"{component_node.content}, \n"
         analyze_component_system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(self.prompt["analyze_component_prompt_v1_system"])
             .render(
                 all_component_content=all_component_content,

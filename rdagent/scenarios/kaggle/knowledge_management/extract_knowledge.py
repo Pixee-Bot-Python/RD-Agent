@@ -12,13 +12,13 @@ prompt_dict = Prompts(file_path=Path(__file__).parent / "prompts.yaml")
 
 def extract_knowledge_from_high_score_answers(content: str):
     sys_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(prompt_dict["extract_kaggle_knowledge_prompts"]["system"])
         .render()
     )
 
     user_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(prompt_dict["extract_kaggle_knowledge_prompts"]["user"])
         .render(file_content=content)
     )
@@ -42,13 +42,13 @@ def extract_knowledge_from_feedback(feedback_response: dict) -> dict:
     Extracts knowledge from LLM-generated feedback and structures it.
     """
     sys_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(prompt_dict["extract_kaggle_knowledge_from_feedback_prompts"]["system"])
         .render()
     )
 
     user_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(prompt_dict["extract_kaggle_knowledge_from_feedback_prompts"]["user"])
         .render(experiment_strategy=feedback_response)
     )
