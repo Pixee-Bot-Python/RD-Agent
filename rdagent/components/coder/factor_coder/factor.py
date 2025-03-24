@@ -15,6 +15,7 @@ from rdagent.core.exception import CodeFormatError, CustomRuntimeError, NoOutput
 from rdagent.core.experiment import Experiment, FBWorkspace, Task
 from rdagent.log import rdagent_logger as logger
 from rdagent.oai.llm_utils import md5_hash
+import fickling
 
 
 class FactorTask(Task):
@@ -118,7 +119,7 @@ class FactorFBWorkspace(FBWorkspace):
                 cache_file_path = Path(FACTOR_IMPLEMENT_SETTINGS.cache_location) / f"{target_file_name}.pkl"
                 Path(FACTOR_IMPLEMENT_SETTINGS.cache_location).mkdir(exist_ok=True, parents=True)
                 if cache_file_path.exists() and not self.raise_exception:
-                    cached_res = pickle.load(open(cache_file_path, "rb"))
+                    cached_res = fickling.load(open(cache_file_path, "rb"))
                     if store_result and cached_res[1] is not None:
                         self.executed_factor_value_dataframe = cached_res[1]
                     return cached_res

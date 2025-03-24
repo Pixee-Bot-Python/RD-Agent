@@ -19,6 +19,7 @@ from rdagent.components.coder.model_coder.CoSTEER.knowledge_management import (
 from rdagent.components.coder.model_coder.model import ModelExperiment
 from rdagent.core.developer import Developer
 from rdagent.core.evolving_agent import RAGEvoAgent
+import fickling
 
 
 class ModelCoSTEER(Developer[ModelExperiment]):
@@ -52,7 +53,7 @@ class ModelCoSTEER(Developer[ModelExperiment]):
 
     def load_or_init_knowledge_base(self, former_knowledge_base_path: Path = None, component_init_list: list = []):
         if former_knowledge_base_path is not None and former_knowledge_base_path.exists():
-            model_knowledge_base = pickle.load(open(former_knowledge_base_path, "rb"))
+            model_knowledge_base = fickling.load(open(former_knowledge_base_path, "rb"))
             if not isinstance(model_knowledge_base, ModelKnowledgeBase):
                 raise ValueError("The former knowledge base is not compatible with the current version")
         else:

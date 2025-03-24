@@ -1,5 +1,4 @@
 import json
-import pickle
 from pathlib import Path
 
 import fire
@@ -10,6 +9,7 @@ from scipy.stats import gmean
 
 from rdagent.components.benchmark.conf import BenchmarkSettings
 from rdagent.components.benchmark.eval_method import FactorImplementEval
+import fickling
 
 
 class BenchmarkAnalyzer:
@@ -31,7 +31,7 @@ class BenchmarkAnalyzer:
             raise ValueError("Invalid file path")
 
         with file_path.open("rb") as f:
-            res = pickle.load(f)
+            res = fickling.load(f)
 
         return res
 

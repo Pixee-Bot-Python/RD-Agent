@@ -6,6 +6,7 @@ from rdagent.components.runner.conf import RUNNER_SETTINGS
 from rdagent.core.developer import Developer
 from rdagent.core.experiment import ASpecificExp, Experiment
 from rdagent.oai.llm_utils import md5_hash
+import fickling
 
 
 class CachedRunner(Developer[ASpecificExp]):
@@ -23,7 +24,7 @@ class CachedRunner(Developer[ASpecificExp]):
         Path(RUNNER_SETTINGS.cache_path).mkdir(parents=True, exist_ok=True)
         cache_path = Path(RUNNER_SETTINGS.cache_path) / f"{task_info_key}.pkl"
         if cache_path.exists():
-            return True, pickle.load(open(cache_path, "rb"))
+            return True, fickling.load(open(cache_path, "rb"))
         else:
             return False, None
 
