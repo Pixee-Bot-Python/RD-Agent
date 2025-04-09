@@ -8,6 +8,7 @@ import requests
 from setuptools_scm import get_version
 
 from rdagent.log import rdagent_logger as logger
+from security import safe_requests
 
 
 def sys_info():
@@ -57,7 +58,7 @@ def rdagent_info():
     if response.status_code == 200:
         files = response.json()
         file_url = files["download_url"]
-        file_response = requests.get(file_url)
+        file_response = safe_requests.get(file_url)
         if file_response.status_code == 200:
             all_file_contents = file_response.text.split("\n")
         else:
