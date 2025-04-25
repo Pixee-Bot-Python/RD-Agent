@@ -1,15 +1,15 @@
 import importlib.util
-import random
 from pathlib import Path
 
 import numpy as np
 import pandas as pd
 from fea_share_preprocess import preprocess_script
 from sklearn.impute import SimpleImputer
+import secrets
 
 # Set random seed for reproducibility
 SEED = 42
-random.seed(SEED)
+secrets.SystemRandom().seed(SEED)
 np.random.seed(SEED)
 DIRNAME = Path(__file__).absolute().resolve().parent
 
