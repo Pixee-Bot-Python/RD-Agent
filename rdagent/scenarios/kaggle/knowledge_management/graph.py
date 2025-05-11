@@ -43,7 +43,7 @@ class KGKnowledgeGraph(UndirectedGraph):
 
     def analyze_one_document(self, document_content: str, scenario: KGScenario | None) -> list:
         session_system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(PROMPT_DICT["extract_knowledge_graph_from_document"]["system"])
             .render(scenario=scenario.get_scenario_all_desc() if scenario is not None else "")
         )
@@ -52,7 +52,7 @@ class KGKnowledgeGraph(UndirectedGraph):
             session_system_prompt=session_system_prompt,
         )
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(PROMPT_DICT["extract_knowledge_graph_from_document"]["user"])
             .render(document_content=document_content)
         )

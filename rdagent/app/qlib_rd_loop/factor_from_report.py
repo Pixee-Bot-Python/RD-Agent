@@ -38,10 +38,10 @@ def generate_hypothesis(factor_result: dict, report_content: str) -> str:
         str: The generated hypothesis.
     """
     system_prompt = (
-        Environment(undefined=StrictUndefined).from_string(prompts["hypothesis_generation"]["system"]).render()
+        Environment(undefined=StrictUndefined, autoescape=True).from_string(prompts["hypothesis_generation"]["system"]).render()
     )
     user_prompt = (
-        Environment(undefined=StrictUndefined)
+        Environment(undefined=StrictUndefined, autoescape=True)
         .from_string(prompts["hypothesis_generation"]["user"])
         .render(factor_descriptions=json.dumps(factor_result), report_content=report_content)
     )

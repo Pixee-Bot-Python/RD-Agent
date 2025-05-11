@@ -40,7 +40,7 @@ class DMModelHypothesisExperiment2Feedback(HypothesisExperiment2Feedback):
         SOTA_hypothesis, SOTA_experiment = trace.get_sota_hypothesis_and_experiment()
 
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(feedback_prompts["model_feedback_generation"]["user"])
             .render(
                 context=context,

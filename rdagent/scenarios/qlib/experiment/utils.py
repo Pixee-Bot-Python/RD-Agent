@@ -60,7 +60,7 @@ def get_data_folder_intro():
     ):
         generate_data_folder_from_qlib()
 
-    JJ_TPL = Environment(undefined=StrictUndefined).from_string(
+    JJ_TPL = Environment(undefined=StrictUndefined, autoescape=True).from_string(
         """
 {{file_name}}
 ```{{type_desc}}

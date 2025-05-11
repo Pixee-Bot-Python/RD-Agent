@@ -26,7 +26,7 @@ class QlibModelHypothesisGen(ModelHypothesisGen):
     def prepare_context(self, trace: Trace) -> Tuple[dict, bool]:
         hypothesis_and_feedback = (
             (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(prompt_dict["hypothesis_and_feedback"])
                 .render(trace=trace)
             )
@@ -61,7 +61,7 @@ class QlibModelHypothesis2Experiment(ModelHypothesis2Experiment):
 
         hypothesis_and_feedback = (
             (
-                Environment(undefined=StrictUndefined)
+                Environment(undefined=StrictUndefined, autoescape=True)
                 .from_string(prompt_dict["hypothesis_and_feedback"])
                 .render(trace=trace)
             )

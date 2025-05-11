@@ -38,7 +38,7 @@ class FactorHypothesisGen(HypothesisGen):
         context_dict, json_flag = self.prepare_context(trace)
 
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["hypothesis_gen"]["system_prompt"])
             .render(
                 targets="factors",
@@ -48,7 +48,7 @@ class FactorHypothesisGen(HypothesisGen):
             )
         )
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["hypothesis_gen"]["user_prompt"])
             .render(
                 targets="factors",
@@ -76,7 +76,7 @@ class FactorHypothesis2Experiment(Hypothesis2Experiment[FactorExperiment]):
     def convert(self, hypothesis: Hypothesis, trace: Trace) -> FactorExperiment:
         context, json_flag = self.prepare_context(hypothesis, trace)
         system_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["hypothesis2experiment"]["system_prompt"])
             .render(
                 targets="factors",
@@ -85,7 +85,7 @@ class FactorHypothesis2Experiment(Hypothesis2Experiment[FactorExperiment]):
             )
         )
         user_prompt = (
-            Environment(undefined=StrictUndefined)
+            Environment(undefined=StrictUndefined, autoescape=True)
             .from_string(prompt_dict["hypothesis2experiment"]["user_prompt"])
             .render(
                 targets="factors",
