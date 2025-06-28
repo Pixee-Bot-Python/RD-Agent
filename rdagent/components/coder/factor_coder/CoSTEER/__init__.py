@@ -25,6 +25,7 @@ from rdagent.core.developer import Developer
 from rdagent.core.evolving_agent import RAGEvoAgent
 from rdagent.core.scenario import Scenario
 from rdagent.log import rdagent_logger as logger
+import fickling
 
 
 class FactorCoSTEER(Developer[FactorExperiment]):
@@ -60,7 +61,7 @@ class FactorCoSTEER(Developer[FactorExperiment]):
 
     def load_or_init_knowledge_base(self, former_knowledge_base_path: Path = None, component_init_list: list = []):
         if former_knowledge_base_path is not None and former_knowledge_base_path.exists():
-            factor_knowledge_base = pickle.load(open(former_knowledge_base_path, "rb"))
+            factor_knowledge_base = fickling.load(open(former_knowledge_base_path, "rb"))
             if self.evolving_version == 1 and not isinstance(factor_knowledge_base, FactorKnowledgeBaseV1):
                 raise ValueError("The former knowledge base is not compatible with the current version")
             elif self.evolving_version == 2 and not isinstance(
